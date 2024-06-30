@@ -1,0 +1,3 @@
+{
+  "*.{tsx,ts}": ["npm run format:fix", "npm run lint"]
+}
