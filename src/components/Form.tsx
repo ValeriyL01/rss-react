@@ -23,9 +23,9 @@ class Form extends Component<FormProps> {
   render() {
     const { isLoading, value } = this.props
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={value} onChange={this.handleChange} disabled={isLoading} />
-        <button type="submit" disabled={isLoading}>
+      <form className="form" onSubmit={this.handleSubmit}>
+        <input className="input" type="text" value={value} onChange={this.handleChange} disabled={isLoading} />
+        <button className="button" type="submit" disabled={isLoading}>
           Search
         </button>
       </form>

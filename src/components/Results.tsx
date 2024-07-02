@@ -8,9 +8,9 @@ function Results({ characters }: ResultsProps) {
   return (
     <div>
       {characters.length ? (
-        <ul>
+        <div className="list-items">
           {characters.map((character) => (
-            <li key={character.name}>
+            <div className="item" key={character.name}>
               <h3>{character.name}</h3>
               <ul>
                 <li>Birth year: {character.birth_year}</li>
@@ -19,9 +19,9 @@ function Results({ characters }: ResultsProps) {
                 <li>Height: {character.height}</li>
                 <li>Gender: {character.gender}</li>
               </ul>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <h2>Enter the correct character name</h2>
       )}

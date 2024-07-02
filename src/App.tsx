@@ -1,7 +1,7 @@
 import './App.css'
 import { Component } from 'react'
 
-import Results from './components/Main'
+import Results from './components/Results'
 import Form from './components/Form'
 import getCharacter from './api/api'
 import { Character } from './types/types'
