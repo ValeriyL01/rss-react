@@ -18,6 +18,8 @@ function Results({ characters }: ResultsProps) {
                 <li>Hair color: {character.hair_color}</li>
                 <li>Height: {character.height}</li>
                 <li>Gender: {character.gender}</li>
+                <li>Skin color: {character.skin_color}</li>
+                <li>Mass: {character.mass}</li>
               </ul>
             </div>
           ))}
