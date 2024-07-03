@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent } from 'react'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 type FormProps = {
   value: string
@@ -8,6 +9,7 @@ type FormProps = {
 }
 
 function Form({ value, setValue, getResults, isLoading }: FormProps) {
+  const [, setStorageValue] = useLocalStorage('CharacterName', '')
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
@@ -15,7 +17,7 @@ function Form({ value, setValue, getResults, isLoading }: FormProps) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     getResults(value)
-    localStorage.setItem('CharacterName', value)
+    setStorageValue(value)
   }
 
   return (

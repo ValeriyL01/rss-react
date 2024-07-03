@@ -5,12 +5,13 @@ import Results from './components/Results'
 import Form from './components/Form'
 import getCharacter from './api/api'
 import { Character } from './types/types'
+import useLocalStorage from './hooks/useLocalStorage'
 
 function App() {
   const [value, setValue] = useState('')
   const [characters, setCharacters] = useState<Character[]>([])
   const [isLoading, setIsLoading] = useState(false)
-
+  const [storageValue] = useLocalStorage('CharacterName', '')
   const getResults = async (InputValue: string) => {
     try {
       setIsLoading(true)
@@ -25,7 +26,6 @@ function App() {
   }
 
   useEffect(() => {
-    const storageValue = localStorage.getItem('CharacterName') ?? ''
     getResults(storageValue)
   }, [])
 
