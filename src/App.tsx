@@ -1,70 +1,52 @@
 import './App.css'
-import { Component } from 'react'
+import { useEffect, useState } from 'react'
 
 import Results from './components/Results'
 import Form from './components/Form'
 import getCharacter from './api/api'
 import { Character } from './types/types'
 
-interface MyProps {
-  value: string
-  characters: Character[]
-  isLoading: boolean
-}
-type MyState = object
-class App extends Component<MyState, MyProps> {
-  constructor(props: MyProps) {
-    super(props)
-    this.state = {
-      value: '',
-      characters: [],
-      isLoading: false,
-    }
-  }
+function App() {
+  const [value, setValue] = useState('')
+  const [characters, setCharacters] = useState<Character[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  componentDidMount() {
-    const storageValue = localStorage.getItem('CharacterName') ?? ''
-    this.setState({ value: storageValue }, () => {
-      this.getResults()
-    })
-  }
-
-  setValue = (value: string) => {
-    this.setState({ value })
-  }
-
-  getResults = async () => {
-    const { value } = this.state
+  const getResults = async (InputValue: string) => {
     try {
-      this.setState({ isLoading: true })
-      const data = await getCharacter(value.trim())
+      setIsLoading(true)
+      const data = await getCharacter(InputValue.trim())
       if (data) {
-        this.setState({ characters: data, isLoading: false })
+        setCharacters(data)
+        setIsLoading(false)
       }
     } catch (error) {
       console.error(error)
     }
   }
 
-  error = () => {
-    this.setState(() => {
+  useEffect(() => {
+    const storageValue = localStorage.getItem('CharacterName') ?? ''
+    getResults(storageValue)
+  }, [])
+
+  const throwError = () => {
+    try {
       throw new Error('Eto error')
-    })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
-  render() {
-    const { value, isLoading, characters } = this.state
-    return (
-      <div className="container">
-        <h1>Search Star Wars characters</h1>
-        <Form value={value} setValue={this.setValue} searchItems={this.getResults} isLoading={isLoading} />
-        {isLoading ? <h2>Loading...</h2> : <Results characters={characters} />}
-        <button type="button" onClick={this.error} disabled={isLoading}>
-          Error
-        </button>
-      </div>
-    )
-  }
+  return (
+    <div className="container">
+      <h1>Search Star Wars characters</h1>
+      <Form value={value} setValue={setValue} getResults={getResults} isLoading={isLoading} />
+      {isLoading ? <h2>Loading...</h2> : <Results characters={characters} />}
+      <button type="button" onClick={throwError} disabled={isLoading}>
+        Error
+      </button>
+    </div>
+  )
 }
 
 export default App
