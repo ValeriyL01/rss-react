@@ -41,3 +41,8 @@ ul {
   background-color: aliceblue;
   border-radius: 10%;
 }
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}

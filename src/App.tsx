@@ -1,52 +1,22 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
-import { useEffect, useState } from 'react'
 
-import Results from './components/Results'
-import Form from './components/Form'
-import getCharacter from './api/api'
-import { Character } from './types/types'
-import useLocalStorage from './hooks/useLocalStorage'
+import MainPage from './pages/MainPage'
+import NotFoundPage from './pages/NotFoundPage'
+import RouterOutlet from './router/routerOutlet'
+import Details from './pages/Details'
 
 function App() {
-  const [value, setValue] = useState('')
-  const [characters, setCharacters] = useState<Character[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [storageValue] = useLocalStorage('CharacterName', '')
-  const getResults = async (InputValue: string) => {
-    try {
-      setIsLoading(true)
-      const data = await getCharacter(InputValue.trim())
-      if (data) {
-        setCharacters(data)
-        setIsLoading(false)
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  useEffect(() => {
-    getResults(storageValue)
-  }, [])
-
-  const throwError = () => {
-    try {
-      throw new Error('Eto error')
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   return (
-    <div className="container">
-      <h1>Search Star Wars characters</h1>
-      <Form value={value} setValue={setValue} getResults={getResults} isLoading={isLoading} />
-      {isLoading ? <h2>Loading...</h2> : <Results characters={characters} />}
-      <button type="button" onClick={throwError} disabled={isLoading}>
-        Error
-      </button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<RouterOutlet />}>
+          <Route index element={<MainPage />} />
+          <Route path="details/:key" element={<Details />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
-
 export default App
