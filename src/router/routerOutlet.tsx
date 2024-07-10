@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom'
+import MainPage from '../pages/MainPage'
 
 function RouterOutlet() {
   return (
     <>
-      <h1>Search Star Wars characters</h1>
+      <MainPage />
       <Outlet />
     </>
   )

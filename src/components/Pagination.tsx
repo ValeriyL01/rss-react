@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 interface PaginationProps {
@@ -5,6 +6,7 @@ interface PaginationProps {
   onPageChange: (pageNumber: number) => void
 }
 function Pagination({ totalPages, onPageChange }: PaginationProps) {
+  const [activePage, setActivePage] = useState(1)
   const pageNumbers: number[] = []
 
   for (let i = 1; i <= totalPages; i += 1) {
@@ -16,7 +18,14 @@ function Pagination({ totalPages, onPageChange }: PaginationProps) {
       {pageNumbers.map((number) => (
         <li key={number}>
           <NavLink to={`/?page=${number}`}>
-            <button type="button" onClick={() => onPageChange(number)}>
+            <button
+              className={number === activePage ? 'active-pagination-button' : ''}
+              type="button"
+              onClick={() => {
+                onPageChange(number)
+                setActivePage(number)
+              }}
+            >
               {number}
             </button>
           </NavLink>

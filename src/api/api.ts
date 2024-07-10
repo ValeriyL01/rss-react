@@ -12,7 +12,7 @@ const getAllCharacters = async (pageNumber = 1): Promise<ResponseData | undefine
 
     return { results: data.results, count: data.count }
   } catch (err) {
-    console.error(err)
+    throw new Error('Failed to fetch data')
   }
 }
 
@@ -23,7 +23,7 @@ const getCharacter = async (name: string): Promise<ResponseData | undefined> => 
 
     return { results: data.results, count: data.count }
   } catch (err) {
-    console.error(err)
+    throw new Error('Failed to fetch data')
   }
 }
 

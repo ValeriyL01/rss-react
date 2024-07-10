@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Character } from '../types/types'
 import useLocalStorage from '../hooks/useLocalStorage'
 import Results from '../components/Results'
 import Form from '../components/Form'
 import { getAllCharacters, getCharacter } from '../api/api'
 import Pagination from '../components/Pagination'
+import Loading from '../components/Loading'
 
 function MainPage() {
   const [value, setValue] = useState('')
@@ -14,11 +15,11 @@ function MainPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const location = useLocation()
+  const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(
     Number(location.search.split('=')[1]) ? Number(location.search.split('=')[1]) : 1,
   )
   const [storageValue, setStorageValue] = useLocalStorage('CharacterName', '')
-
   const getResults = async (inputValue: string) => {
     try {
       setIsLoading(true)
@@ -38,11 +39,17 @@ function MainPage() {
       }
       setIsLoading(false)
     } catch (error) {
-      console.error(error)
+      throw new Error('Failed to fetch data')
     }
   }
-
-  const handlePageChange = (pageNumber: number) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (event.target === event.currentTarget) {
+      if (location.pathname.split('/')[1] === 'details') {
+        navigate(`/${location.search}`)
+      }
+    }
+  }
+  const handlePageChange = (pageNumber: number): void => {
     setCurrentPage(pageNumber)
     setStorageValue('')
   }
@@ -51,9 +58,16 @@ function MainPage() {
   }, [currentPage, storageValue])
 
   return (
-    <div className="container">
+    <div className="container" onClick={handleClick}>
+      <h1>Search Star Wars characters</h1>
       <Form value={value} setValue={setValue} getResults={getResults} isLoading={isLoading} />
-      {isLoading ? <h1>Loading...</h1> : <Results characters={characters} />}
+      {isLoading ? (
+        <div className="loading-wrapper">
+          <Loading />
+        </div>
+      ) : (
+        <Results characters={characters} location={location} />
+      )}
 
       <Pagination totalPages={totalPages} onPageChange={handlePageChange} />
     </div>

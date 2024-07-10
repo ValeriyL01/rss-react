@@ -52,6 +52,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'class-methods-use-this': 'off',
     'consistent-return': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
   },
   settings: {
     react: {

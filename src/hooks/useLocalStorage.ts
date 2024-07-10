@@ -8,7 +8,7 @@ function useLocalStorage(key: string, initValue: string): [string, React.Dispatc
 
   useEffect(() => {
     localStorage.setItem(key, state)
-  }, [state])
+  }, [key, state])
   return [state, setState]
 }
 
