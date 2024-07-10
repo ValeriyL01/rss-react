@@ -34,7 +34,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'prettier'],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'prettier', 'react-compiler'],
   rules: {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
@@ -52,6 +52,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'class-methods-use-this': 'off',
     'consistent-return': 'off',
+    'react-compiler/react-compiler': "error"
   },
   settings: {
     react: {
