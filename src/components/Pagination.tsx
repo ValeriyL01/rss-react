@@ -19,7 +19,7 @@ function Pagination({ totalPages, onPageChange }: PaginationProps) {
         <li key={number}>
           <NavLink to={`/?page=${number}`}>
             <button
-              className={number === activePage ? 'active-pagination-button' : ''}
+              className={`${number === activePage ? 'active-pagination-button' : ''}`}
               type="button"
               onClick={() => {
                 onPageChange(number)
