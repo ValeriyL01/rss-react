@@ -21,7 +21,7 @@ function Results({ characters, location }: ResultsProps) {
         <div className="list-items">
           {characters.map((character) => (
             <div className="item" key={character.name}>
-              <NavLink key={`${character.name}`} to={`/details/${character.name}${location.search}`}>
+              <NavLink data-testid="link" key={`${character.name}`} to={`/details/${character.name}${location.search}`}>
                 <h3>{character.name}</h3>
                 <ul>
                   <li>Birth year: {character.birth_year}</li>

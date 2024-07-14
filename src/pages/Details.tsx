@@ -4,6 +4,7 @@ import { getCharacter } from '../api/api'
 import { Character } from '../types/types'
 import getKeyFromUrl from '../utils/getKeyFromUrl'
 import Loading from '../components/Loading'
+import DetailsComponent from '../components/DetailsComponent'
 
 function Details() {
   const [characterDetails, setCharacterDetail] = useState<Character>({
@@ -42,31 +43,7 @@ function Details() {
 
   return (
     <div className="aside-wrapper">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <aside className="aside">
-          <div>
-            <h1>Details</h1>
-            <div className="item">
-              <h3>{characterDetails.name}</h3>
-              <ul>
-                <li>Birth year: {characterDetails.birth_year}</li>
-                <li>Eye color: {characterDetails.eye_color}</li>
-                <li>Hair color: {characterDetails.hair_color}</li>
-                <li>Height: {characterDetails.height}</li>
-                <li>Gender: {characterDetails.gender}</li>
-                <li>Skin color: {characterDetails.skin_color}</li>
-                <li>Mass: {characterDetails.mass}</li>
-              </ul>
-            </div>
-          </div>
-
-          <button className="button-clouse" type="button" onClick={handleClick}>
-            X
-          </button>
-        </aside>
-      )}
+      {isLoading ? <Loading /> : <DetailsComponent characterDetails={characterDetails} handleClick={handleClick} />}
     </div>
   )
 }

@@ -16,20 +16,40 @@ const mockProps: FormProps = {
   isLoading: false,
 }
 
-test('saving entered value to local storage on button click', async () => {
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  render(<Form {...mockProps} />)
+describe('form component', () => {
+  it('saving entered value to local storage on button click', async () => {
+    render(
+      <Form
+        value={mockProps.value}
+        setValue={mockProps.setValue}
+        getResults={mockProps.getResults}
+        isLoading={mockProps.isLoading}
+      />,
+    )
 
-  const input = screen.getByRole('textbox')
-  const inputText = 'Test Value'
+    const input = screen.getByRole('textbox')
+    const inputText = 'Test Value'
 
-  fireEvent.change(input, { target: { value: inputText } })
+    fireEvent.change(input, { target: { value: inputText } })
 
-  const button = screen.getByRole('button')
-  const user = userEvent.setup()
-  await user.click(button)
+    const button = screen.getByRole('button')
+    const user = userEvent.setup()
+    await user.click(button)
 
-  localStorage.setItem('CharacterName', 'Test Value')
+    localStorage.setItem('CharacterName', 'Test Value')
 
-  expect(localStorage.getItem('CharacterName')).toBe(inputText)
+    expect(localStorage.getItem('CharacterName')).toBe(inputText)
+  })
+  it('checking that the button has rendered', () => {
+    render(
+      <Form
+        value={mockProps.value}
+        setValue={mockProps.setValue}
+        getResults={mockProps.getResults}
+        isLoading={mockProps.isLoading}
+      />,
+    )
+    const button = screen.getByRole('button')
+    expect(button).toBeInTheDocument()
+  })
 })
