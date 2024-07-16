@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { ResponseCharacter } from '../types/types'
 
 interface PaginationProps {
-  totalPages: number
+  charactersData: ResponseCharacter
   onPageChange: (pageNumber: number) => void
 }
-function Pagination({ totalPages, onPageChange }: PaginationProps) {
+function Pagination({ charactersData, onPageChange }: PaginationProps) {
   const [activePage, setActivePage] = useState(1)
   const pageNumbers: number[] = []
-
-  for (let i = 1; i <= totalPages; i += 1) {
-    pageNumbers.push(i)
+  if (charactersData) {
+    const totalPages = Math.ceil(charactersData.count / 10)
+    for (let i = 1; i <= totalPages; i += 1) {
+      pageNumbers.push(i)
+    }
   }
 
   return (

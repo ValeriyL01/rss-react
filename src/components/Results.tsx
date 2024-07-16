@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Character } from '../types/types'
+import { ResponseCharacter } from '../types/types'
 
 interface LocationState {
   hash: string
@@ -10,16 +10,16 @@ interface LocationState {
 }
 
 interface ResultsProps {
-  characters: Character[]
+  charactersData: ResponseCharacter
   location: LocationState
 }
 
-function Results({ characters, location }: ResultsProps) {
+function Results({ charactersData, location }: ResultsProps) {
   return (
     <div>
-      {characters.length ? (
+      {charactersData.results.length ? (
         <div className="list-items">
-          {characters.map((character) => (
+          {charactersData.results.map((character) => (
             <div className="item" key={character.name}>
               <NavLink data-testid="link" key={`${character.name}`} to={`/details/${character.name}${location.search}`}>
                 <h3>{character.name}</h3>
