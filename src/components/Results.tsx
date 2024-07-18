@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom'
-import { ResponseCharacter } from '../types/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { Character, ResponseCharacter } from '../types/types'
+import { addSelectedCharacter, removeSelectedCharacter } from '../store/selectedCharacterSlice'
 
 interface LocationState {
   hash: string
@@ -15,6 +17,8 @@ interface ResultsProps {
 }
 
 function Results({ charactersData, location }: ResultsProps) {
+  const dispatch = useDispatch()
+  const selectedCharacters = useSelector((state: { selectedCharacter: Character[] }) => state.selectedCharacter)
   return (
     <div>
       {charactersData.results.length ? (
@@ -27,6 +31,17 @@ function Results({ charactersData, location }: ResultsProps) {
                   <li>Birth year: {character.birth_year}</li>
                 </ul>
               </NavLink>
+              <input
+                type="checkbox"
+                checked={selectedCharacters.some((item) => item.name === character.name)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    dispatch(addSelectedCharacter(character))
+                  } else {
+                    dispatch(removeSelectedCharacter(character))
+                  }
+                }}
+              />
             </div>
           ))}
         </div>
