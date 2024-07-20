@@ -8,6 +8,7 @@
   align-items: center;
 }
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,6 +55,7 @@ ul {
 .pagination {
   display: flex;
   gap: 5px;
+  margin-top: 120px;
 }
 
 .aside {
@@ -87,6 +89,28 @@ ul {
   align-items: center;
   justify-content: center;
   height: 416px;
+}
+
+.popup {
+  position: fixed;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding: 20px;
+  transition: 0.3s;
+  bottom: 0px;
+  opacity: 0;
+  transform: translateY(100%);
+}
+.popup--active {
+  opacity: 1;
+  transform: translateY(-60%);
+}
+.popup-button-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.popup-title {
+  margin-top: 0px;
 }
 /* @media (max-width: 900px) {
   .container-pages {

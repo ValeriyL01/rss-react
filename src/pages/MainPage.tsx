@@ -6,6 +6,7 @@ import Form from '../components/Form'
 import Pagination from '../components/Pagination'
 import Loading from '../components/Loading'
 import { useGetAllCharactersQuery } from '../api/swapi'
+import PopUp from '../components/PopUpComponent'
 
 function MainPage() {
   const [value, setValue] = useState('')
@@ -49,6 +50,7 @@ function MainPage() {
       )}
 
       <Pagination charactersData={charactersData} onPageChange={handlePageChange} />
+      <PopUp />
     </div>
   )
 }

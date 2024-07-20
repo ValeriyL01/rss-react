@@ -1,20 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Character } from '../types/types'
 
-const initialState: Character[] = []
+export interface InitialState {
+  character: Character[]
+}
+
+const initialState: InitialState = {
+  character: [],
+}
 
 const selectedCharacterSlice = createSlice({
   name: 'selectedCharacter',
   initialState,
   reducers: {
     addSelectedCharacter: (state, action: PayloadAction<Character>) => {
-      state.push(action.payload)
+      state.character.push(action.payload)
     },
     removeSelectedCharacter: (state, action: PayloadAction<Character>) => {
-      return state.filter((character) => character.name !== action.payload.name)
+      state.character = state.character.filter((character) => character.name !== action.payload.name)
+    },
+    removeAllCharacters: (state) => {
+      state.character = []
     },
   },
 })
 
-export const { addSelectedCharacter, removeSelectedCharacter } = selectedCharacterSlice.actions
+export const { addSelectedCharacter, removeSelectedCharacter, removeAllCharacters } = selectedCharacterSlice.actions
 export default selectedCharacterSlice.reducer

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Character, ResponseCharacter } from '../types/types'
-import { addSelectedCharacter, removeSelectedCharacter } from '../store/selectedCharacterSlice'
+import { ResponseCharacter } from '../types/types'
+import { addSelectedCharacter, InitialState, removeSelectedCharacter } from '../store/selectedCharacterSlice'
 
 interface LocationState {
   hash: string
@@ -18,7 +18,10 @@ interface ResultsProps {
 
 function Results({ charactersData, location }: ResultsProps) {
   const dispatch = useDispatch()
-  const selectedCharacters = useSelector((state: { selectedCharacter: Character[] }) => state.selectedCharacter)
+  const selectedCharacters = useSelector(
+    (state: { selectedCharacter: InitialState }) => state.selectedCharacter.character,
+  )
+  console.log(selectedCharacters)
   return (
     <div>
       {charactersData.results.length ? (
