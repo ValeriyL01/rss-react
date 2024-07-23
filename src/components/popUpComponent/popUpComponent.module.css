@@ -10,7 +10,7 @@
 }
 .popupActive {
   opacity: 1;
-  transform: translateY(-60%);
+  transform: translateY(-50%);
 }
 .popupButtonsWrapper {
   display: flex;
@@ -21,4 +21,8 @@
 }
 .popupTitle {
   margin-top: 0px;
+}
+.popupDark {
+  background-color: rgb(89, 123, 123);
+  color: white;
 }

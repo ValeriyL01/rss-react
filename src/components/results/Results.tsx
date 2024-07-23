@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useContext } from 'react'
 import { ResponseCharacter } from '../../types/types'
 import { addSelectedCharacter, InitialState, removeSelectedCharacter } from '../../store/selectedCharacterSlice'
 import styles from './results.module.css'
+import themeContext from '../../context/themeContext'
 
 interface LocationState {
   hash: string
@@ -22,16 +24,17 @@ export function Results({ charactersData, location }: ResultsProps) {
   const selectedCharacters = useSelector(
     (state: { selectedCharacter: InitialState }) => state.selectedCharacter.character,
   )
+  const { isDarkTheme } = useContext(themeContext)
   return (
     <div>
       {charactersData.results.length ? (
         <div className={styles.listItems}>
           {charactersData.results.map((character) => (
-            <div className={styles.item} key={character.name}>
+            <div className={`${styles.item} ${isDarkTheme ? styles.darkItem : ''}`} key={character.name}>
               <NavLink data-testid="link" key={`${character.name}`} to={`/details/${character.name}${location.search}`}>
-                <h3>{character.name}</h3>
+                <h3 className={`${isDarkTheme ? styles.itemTitle : ''}`}>{character.name}</h3>
                 <ul>
-                  <li>Birth year: {character.birth_year}</li>
+                  <li className={`${isDarkTheme ? styles.itemText : ''}`}>Birth year: {character.birth_year}</li>
                 </ul>
               </NavLink>
               <input

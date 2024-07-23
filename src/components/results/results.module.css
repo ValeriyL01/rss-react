@@ -10,8 +10,19 @@
   background-color: aliceblue;
   border-radius: 10%;
   padding: 10px;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 .item:hover {
   transform: scale(1.1);
+}
+.darkItem {
+  background-color: rgb(59, 68, 68);
+  color: white;
+}
+.itemTitle {
+  color: white;
+}
+
+.itemText {
+  color: white;
 }

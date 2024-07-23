@@ -25,3 +25,11 @@
   top: 2%;
   right: 5%;
 }
+.detailsDark {
+  background-color: rgb(85, 94, 94);
+  color: white;
+}
+.detailsItemDark {
+  background-color: rgb(59, 68, 68);
+  color: white;
+}

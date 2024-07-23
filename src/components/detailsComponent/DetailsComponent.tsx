@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import themeContext from '../../context/themeContext'
 import { ResponseCharacter } from '../../types/types'
 import { Button } from '../button/Button'
 
@@ -9,12 +11,13 @@ interface DetailsComponentProp {
 }
 
 export function DetailsComponent({ characterData, handleCloseDetails }: DetailsComponentProp) {
+  const { isDarkTheme } = useContext(themeContext)
   const character = characterData.results[0]
   return (
-    <aside className={styles.details}>
+    <aside className={`${styles.details} ${isDarkTheme ? styles.detailsDark : ''}`}>
       <div>
         <h1>Details</h1>
-        <div className={styles.detailsItem}>
+        <div className={`${styles.detailsItem} ${isDarkTheme ? styles.detailsItemDark : ''}`}>
           <h3>{character.name}</h3>
           <ul>
             <li>Birth year: {character.birth_year}</li>

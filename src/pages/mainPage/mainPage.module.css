@@ -3,8 +3,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: 30px;
   max-width: 960px;
+  height: 100vh;
 }
 .dark {
   background-color: #1f1b24;
@@ -14,4 +16,11 @@
   align-items: center;
   justify-content: center;
   height: 416px;
+}
+.formThemeButtonWrapper {
+  display: flex;
+  gap: 15px;
+}
+.titleDark {
+  color: white;
 }

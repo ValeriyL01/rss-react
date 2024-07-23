@@ -11,7 +11,7 @@ import themeContext from '../../context/themeContext'
 import styles from './mainPage.module.css'
 import { Button } from '../../components/button/Button'
 
-function MainPage() {
+export function MainPage() {
   const [value, setValue] = useState('')
   const location = useLocation()
   const pageNumberFromUrl = location.search.split('=')[1]
@@ -22,7 +22,7 @@ function MainPage() {
     name: storageValue,
   })
 
-  const { setIsDarkTheme } = useContext(themeContext)
+  const { isDarkTheme, setIsDarkTheme } = useContext(themeContext)
 
   const handlePageChange = (pageNumber: number): void => {
     setCurrentPage(pageNumber)
@@ -36,12 +36,13 @@ function MainPage() {
   }, [])
   return (
     <div className={styles.container}>
-      <h1>Search Star Wars characters</h1>
-      <Form value={value} setValue={setValue} isLoading={isFetching} handleValueChange={handleValueChange} />
-
-      <Button className="" onClick={toggleTheme} type="button">
-        Theme
-      </Button>
+      <h1 className={`${isDarkTheme ? styles.titleDark : ''}`}>Search Star Wars characters</h1>
+      <div className={styles.formThemeButtonWrapper}>
+        <Form value={value} setValue={setValue} isLoading={isFetching} handleValueChange={handleValueChange} />
+        <Button className={styles.themeButton} onClick={toggleTheme} type="button">
+          Theme
+        </Button>
+      </div>
       {isFetching ? (
         <div className={styles.loadingWrapper}>
           <Loading />
@@ -54,5 +55,3 @@ function MainPage() {
     </div>
   )
 }
-
-export default MainPage
