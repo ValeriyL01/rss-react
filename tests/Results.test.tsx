@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import Results from '../src/components/Results'
+import { Results } from '../src/components/results/Results'
 import { Character } from '../src/types/types'
 
 interface LocationState {

@@ -1,0 +1,17 @@
+.listItems {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  width: 200px;
+  background-color: aliceblue;
+  border-radius: 10%;
+  padding: 10px;
+  transition: 0.3s;
+}
+.item:hover {
+  transform: scale(1.1);
+}

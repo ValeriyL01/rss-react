@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
-import Pagination from '../src/components/Pagination'
+import { Pagination } from '../src/components/pagination/Pagination'
 
 test('Pagination component displays page numbers', async () => {
   const totalPages = 5

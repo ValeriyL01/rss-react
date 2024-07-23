@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from '@testing-library/react'
-import MainPage from '../src/pages/MainPage'
+import MainPage from '../src/pages/mainPage/MainPage'
 
 vi.mock('react-router-dom', () => ({
   useLocation: vi.fn().mockReturnValue({ search: '' }),

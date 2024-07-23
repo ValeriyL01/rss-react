@@ -1,0 +1,27 @@
+.details {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20rem;
+  padding: 7.5rem 0;
+  border-radius: 30px;
+  background-color: rgb(234, 235, 235);
+}
+
+.detailsItem {
+  width: 200px;
+  background-color: aliceblue;
+  border-radius: 10%;
+  padding: 10px;
+  transition: 0.3s;
+}
+.detailsItem:hover {
+  transform: scale(1.1);
+}
+
+.clouseButton {
+  position: absolute;
+  top: 2%;
+  right: 5%;
+}

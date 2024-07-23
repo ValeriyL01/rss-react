@@ -1,10 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import './App.css'
 import { useState } from 'react'
-import NotFoundPage from './pages/NotFoundPage'
+import NotFoundPage from './pages/notFoundPage/NotFoundPage'
 import RouterOutlet from './router/routerOutlet'
-import Details from './pages/Details'
-import themeContext from './themeContext'
+import { Details } from './pages/details/Details'
+import themeContext from './context/themeContext'
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false)

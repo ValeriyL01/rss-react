@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { ResponseCharacter } from '../types/types'
-import { addSelectedCharacter, InitialState, removeSelectedCharacter } from '../store/selectedCharacterSlice'
+import { ResponseCharacter } from '../../types/types'
+import { addSelectedCharacter, InitialState, removeSelectedCharacter } from '../../store/selectedCharacterSlice'
+import styles from './results.module.css'
 
 interface LocationState {
   hash: string
@@ -16,18 +17,17 @@ interface ResultsProps {
   location: LocationState
 }
 
-function Results({ charactersData, location }: ResultsProps) {
+export function Results({ charactersData, location }: ResultsProps) {
   const dispatch = useDispatch()
   const selectedCharacters = useSelector(
     (state: { selectedCharacter: InitialState }) => state.selectedCharacter.character,
   )
-  console.log(selectedCharacters)
   return (
     <div>
       {charactersData.results.length ? (
-        <div className="list-items">
+        <div className={styles.listItems}>
           {charactersData.results.map((character) => (
-            <div className="item" key={character.name}>
+            <div className={styles.item} key={character.name}>
               <NavLink data-testid="link" key={`${character.name}`} to={`/details/${character.name}${location.search}`}>
                 <h3>{character.name}</h3>
                 <ul>
@@ -54,5 +54,3 @@ function Results({ charactersData, location }: ResultsProps) {
     </div>
   )
 }
-
-export default Results

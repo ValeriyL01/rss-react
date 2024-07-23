@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import ErrorBoundary from '../src/components/ErrorBoundary'
+import { ErrorBoundary } from '../src/components/errorBoundary/ErrorBoundary'
 
 describe('ErrorBoundary Component', () => {
   it('should render children when no error', () => {

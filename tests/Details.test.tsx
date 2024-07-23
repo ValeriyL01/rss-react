@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Details from '../src/pages/Details'
+import { Details } from '../src/pages/details/Details'
 
 vi.mock('react-router-dom', () => ({
   useLocation: vi.fn(() => ({ search: 'name=Luke Skywalker' })),

@@ -1,17 +1,20 @@
-import { ResponseCharacter } from '../types/types'
+import { ResponseCharacter } from '../../types/types'
+import { Button } from '../button/Button'
+
+import styles from './detailsComponent.module.css'
 
 interface DetailsComponentProp {
   characterData: ResponseCharacter
-  handleClick: () => void
+  handleCloseDetails: () => void
 }
 
-function DetailsComponent({ characterData, handleClick }: DetailsComponentProp) {
+export function DetailsComponent({ characterData, handleCloseDetails }: DetailsComponentProp) {
   const character = characterData.results[0]
   return (
-    <aside className="aside">
+    <aside className={styles.details}>
       <div>
         <h1>Details</h1>
-        <div className="item">
+        <div className={styles.detailsItem}>
           <h3>{character.name}</h3>
           <ul>
             <li>Birth year: {character.birth_year}</li>
@@ -24,12 +27,9 @@ function DetailsComponent({ characterData, handleClick }: DetailsComponentProp) 
           </ul>
         </div>
       </div>
-
-      <button className="button-clouse" type="button" onClick={handleClick}>
+      <Button className={styles.clouseButton} type="button" onClick={handleCloseDetails}>
         X
-      </button>
+      </Button>
     </aside>
   )
 }
-
-export default DetailsComponent

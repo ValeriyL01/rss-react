@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  max-width: 960px;
+}
+.dark {
+  background-color: #1f1b24;
+}
+.loadingWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 416px;
+}

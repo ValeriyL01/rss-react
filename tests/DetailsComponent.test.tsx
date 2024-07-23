@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import DetailsComponent from '../src/components/DetailsComponent'
+import { DetailsComponent } from '../src/components/detailsComponent/DetailsComponent'
 
 const characterDetails = {
   name: 'Luke Skywalker',
