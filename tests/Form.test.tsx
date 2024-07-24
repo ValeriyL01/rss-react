@@ -6,14 +6,14 @@ import { Form } from '../src/components/form/Form'
 type FormProps = {
   value: string
   setValue: (value: string) => void
-  getResults: (inputValue: string) => void
   isLoading: boolean
+  handleValueChange: (name: string) => void
 }
 const mockProps: FormProps = {
   value: '',
   setValue: vi.fn(),
-  getResults: vi.fn(),
   isLoading: false,
+  handleValueChange: vi.fn(),
 }
 
 describe('form component', () => {
@@ -22,7 +22,7 @@ describe('form component', () => {
       <Form
         value={mockProps.value}
         setValue={mockProps.setValue}
-        getResults={mockProps.getResults}
+        handleValueChange={mockProps.handleValueChange}
         isLoading={mockProps.isLoading}
       />,
     )
@@ -45,7 +45,7 @@ describe('form component', () => {
       <Form
         value={mockProps.value}
         setValue={mockProps.setValue}
-        getResults={mockProps.getResults}
+        handleValueChange={mockProps.handleValueChange}
         isLoading={mockProps.isLoading}
       />,
     )
