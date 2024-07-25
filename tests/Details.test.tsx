@@ -1,6 +1,7 @@
+import { Provider } from 'react-redux'
 import { render, screen } from '@testing-library/react'
-
-import Details from '../src/pages/Details'
+import { Details } from '../src/pages/details/Details'
+import { store } from '../src/store/store'
 
 vi.mock('react-router-dom', () => ({
   useLocation: vi.fn(() => ({ search: 'name=Luke Skywalker' })),
@@ -28,7 +29,11 @@ vi.mock('../api/api', () => ({
 
 describe('Details', () => {
   it('displays the Loading component', async () => {
-    render(<Details />)
+    render(
+      <Provider store={store}>
+        <Details />
+      </Provider>,
+    )
 
     const loadingElement = screen.queryByText('Loading...')
     expect(loadingElement).toBeInTheDocument()

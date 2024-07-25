@@ -55,6 +55,16 @@ module.exports = {
     'consistent-return': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
+    'no-param-reassign': 'off',
+    'import/prefer-default-export': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
+    'react/button-has-type': 'off',
+    'react/require-default-props': [
+      'error',
+      {
+        functions: 'ignore',
+      },
+    ],
   },
   settings: {
     react: {
