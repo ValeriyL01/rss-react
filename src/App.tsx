@@ -9,7 +9,6 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <themeContext.Provider value={{ isDarkTheme, setIsDarkTheme }}>
       <div className={`container-pages ${isDarkTheme ? 'dark' : ''}`}>
         <Routes>
