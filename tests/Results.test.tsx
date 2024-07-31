@@ -1,21 +1,13 @@
 import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+
 import { Provider } from 'react-redux'
 import { Results } from '../src/components/results/Results'
 import { ResponseCharacter } from '../src/types/types'
 import { store } from '../src/store/store'
 
-interface LocationState {
-  hash: string
-  key: string
-  pathname: string
-  search: string
-  state: null
-}
-
 interface ResultsProps {
   charactersData: ResponseCharacter
-  location: LocationState
+  currentPath: string
 }
 const mockCharacters: ResponseCharacter = {
   count: 82,
@@ -52,21 +44,13 @@ describe('Results component', () => {
   it('displays the correct number of cards', () => {
     const props: ResultsProps = {
       charactersData: mockCharacters,
-      location: {
-        hash: 'hash',
-        key: 'key',
-        pathname: 'pathname',
-        search: 'search',
-        state: null,
-      },
+      currentPath: '',
     }
 
     render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Results charactersData={props.charactersData} location={props.location} />
-        </Provider>
-      </MemoryRouter>,
+      <Provider store={store}>
+        <Results charactersData={props.charactersData} currentPath={props.currentPath} />
+      </Provider>,
     )
 
     const cardElements = screen.getAllByTestId('link')
@@ -76,21 +60,13 @@ describe('Results component', () => {
   it('displays a message if no cards are present', () => {
     const props: ResultsProps = {
       charactersData: mockCharactersEmptyData,
-      location: {
-        hash: 'hash',
-        key: 'key',
-        pathname: 'pathname',
-        search: 'search',
-        state: null,
-      },
+      currentPath: '',
     }
 
     render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Results charactersData={props.charactersData} location={props.location} />
-        </Provider>
-      </MemoryRouter>,
+      <Provider store={store}>
+        <Results charactersData={props.charactersData} currentPath={props.currentPath} />
+      </Provider>,
     )
 
     const messageElement = screen.getByText('Enter the correct character name')

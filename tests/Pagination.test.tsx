@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router-dom'
+
 import { Pagination } from '../src/components/pagination/Pagination'
 import { ResponseCharacter } from '../src/types/types'
 
@@ -39,11 +39,7 @@ test('Pagination component displays page numbers', async () => {
   const totalPages = 9
   const onPageChange = vi.fn()
 
-  render(
-    <MemoryRouter>
-      <Pagination charactersData={props.charactersData} onPageChange={onPageChange} />
-    </MemoryRouter>,
-  )
+  render(<Pagination charactersData={props.charactersData} onPageChange={onPageChange} />)
 
   const pageButtons = screen.getAllByRole('button')
   expect(pageButtons).toHaveLength(totalPages)

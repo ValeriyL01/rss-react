@@ -1,27 +1,29 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import getKeyFromUrl from '../../utils/getKeyFromUrl'
 import { Loading } from '../../components/loading/Loading'
 import { DetailsComponent } from '../../components/detailsComponent/DetailsComponent'
 import { useGetAllCharactersQuery } from '../../api/swapi'
-import styles from './details.module.css'
+
 import themeContext from '../../context/themeContext'
 
-export function Details() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const characterName = getKeyFromUrl()
+function Details() {
+  const router = useRouter()
+  const { name } = router.query
+
+  const characterName = name
+
   const { data: characterData, isFetching } = useGetAllCharactersQuery({
     pageNumber: '',
     name: characterName,
   })
   const { isDarkTheme } = useContext(themeContext)
+
   const handleCloseDetails = () => {
-    navigate(`/${location.search}`)
+    router.push('/')
   }
 
   return (
-    <div className={`${styles.detailsWrapper} ${isDarkTheme ? 'dark' : ''} `}>
+    <div className={`detailsWrapper ${isDarkTheme ? 'dark' : ''} `}>
       {isFetching ? (
         <Loading />
       ) : (
@@ -30,3 +32,4 @@ export function Details() {
     </div>
   )
 }
+export default Details

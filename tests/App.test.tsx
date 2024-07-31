@@ -1,15 +1,13 @@
 import { Provider } from 'react-redux'
 import { render } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+
+import App from 'next/app'
 import { store } from '../src/store/store'
-import App from '../src/App'
 
 test('renders App component with RouterOutlet, Details, and NotFoundPage', async () => {
   const { container } = render(
     <Provider store={store}>
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
+      <App />
     </Provider>,
   )
 

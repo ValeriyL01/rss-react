@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { render, screen } from '@testing-library/react'
-import { Details } from '../src/pages/details/Details'
+import Details from '../src/pages/details/[name]'
 import { store } from '../src/store/store'
 
 vi.mock('react-router-dom', () => ({

@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import userEvent from '@testing-library/user-event'
-import { MainPage } from '../src/pages/mainPage/MainPage'
+import MainPage from '../src/pages'
 import { store } from '../src/store/store'
 
 vi.mock('react-router-dom', () => ({

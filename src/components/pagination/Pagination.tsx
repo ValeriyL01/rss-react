@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { ResponseCharacter } from '../../types/types'
 import styles from './pagination.module.css'
 import { calculateNumberPagesPagination } from '../../utils/calculateNumberPagesPagination'
@@ -10,8 +11,9 @@ interface PaginationProps {
   onPageChange: (pageNumber: number) => void
 }
 export function Pagination({ charactersData, onPageChange }: PaginationProps) {
-  const location = useLocation()
-  const pageNumberFromUrl = Number(location.search.split('=')[1])
+  const router = useRouter()
+  const currentPath = router.asPath
+  const pageNumberFromUrl = Number(currentPath.split('=')[1])
   const [activePage, setActivePage] = useState(pageNumberFromUrl ? Number(pageNumberFromUrl) : 1)
   const numberElementsOnPage = 10
   const pageNumbers = calculateNumberPagesPagination(charactersData, numberElementsOnPage)
@@ -19,7 +21,7 @@ export function Pagination({ charactersData, onPageChange }: PaginationProps) {
     <ul className={styles.pagination}>
       {pageNumbers.map((pageNumber) => (
         <li key={pageNumber}>
-          <NavLink to={`/?page=${pageNumber}`}>
+          <Link href={`/?page=${pageNumber}`}>
             <Button
               className={`${pageNumber === activePage ? styles.activePaginationButton : ''}`}
               onClick={() => {
@@ -30,7 +32,7 @@ export function Pagination({ charactersData, onPageChange }: PaginationProps) {
             >
               {pageNumber}
             </Button>
-          </NavLink>
+          </Link>
         </li>
       ))}
     </ul>
