@@ -1,21 +1,38 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { GetServerSideProps } from 'next'
 import { Loading } from '../../components/loading/Loading'
 import { DetailsComponent } from '../../components/detailsComponent/DetailsComponent'
-import { useGetAllCharactersQuery } from '../../api/swapi'
+import { swapi } from '../../api/swapi'
 
 import themeContext from '../../context/themeContext'
+import { store } from '../../store/store'
+import { ResponseCharacter } from '../../types/types'
 
-function Details() {
+interface InitialCharacterData {
+  initialCharacterData: ResponseCharacter
+}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { name } = context.query
+
+  const { dispatch } = store
+
+  const result = await dispatch(
+    swapi.endpoints.getAllCharacters.initiate({
+      pageNumber: '',
+      name,
+    }),
+  )
+
+  const characterData: ResponseCharacter = result.data || null
+  return {
+    props: {
+      initialCharacterData: characterData,
+    },
+  }
+}
+function Details({ initialCharacterData }: InitialCharacterData) {
   const router = useRouter()
-  const { name } = router.query
-
-  const characterName = name
-
-  const { data: characterData, isFetching } = useGetAllCharactersQuery({
-    pageNumber: '',
-    name: characterName,
-  })
   const { isDarkTheme } = useContext(themeContext)
 
   const handleCloseDetails = () => {
@@ -23,11 +40,11 @@ function Details() {
   }
 
   return (
-    <div className={`detailsWrapper ${isDarkTheme ? 'dark' : ''} `}>
-      {isFetching ? (
+    <div className={`detailsWrapper ${isDarkTheme ? 'dark' : ''}`}>
+      {!initialCharacterData ? (
         <Loading />
       ) : (
-        <DetailsComponent characterData={characterData} handleCloseDetails={handleCloseDetails} />
+        <DetailsComponent characterData={initialCharacterData} handleCloseDetails={handleCloseDetails} />
       )}
     </div>
   )
