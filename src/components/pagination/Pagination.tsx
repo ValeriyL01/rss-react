@@ -8,9 +8,8 @@ import { Button } from '../button/Button'
 
 interface PaginationProps {
   charactersData: ResponseCharacter
-  onPageChange: (pageNumber: number) => void
 }
-export function Pagination({ charactersData, onPageChange }: PaginationProps) {
+export function Pagination({ charactersData }: PaginationProps) {
   const router = useRouter()
   const currentPath = router.asPath
   const pageNumberFromUrl = Number(currentPath.split('=')[1])
@@ -25,7 +24,6 @@ export function Pagination({ charactersData, onPageChange }: PaginationProps) {
             <Button
               className={`${pageNumber === activePage ? styles.activePaginationButton : ''}`}
               onClick={() => {
-                onPageChange(pageNumber)
                 setActivePage(pageNumber)
               }}
               type="button"

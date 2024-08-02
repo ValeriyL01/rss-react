@@ -1,7 +1,6 @@
 import { useCallback, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
-import useLocalStorage from '../hooks/useLocalStorage'
 import { Results } from '../components/results/Results'
 import { Form } from '../components/form/Form'
 import { Pagination } from '../components/pagination/Pagination'
@@ -35,27 +34,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 interface MainPageProps {
   initialCharacterData: ResponseCharacter
-  initialPageNumber: number
+
   initialName: string
 }
 
-function MainPage({ initialCharacterData, initialPageNumber, initialName }: MainPageProps) {
+function MainPage({ initialCharacterData, initialName }: MainPageProps) {
   const [value, setValue] = useState(initialName)
-  const [, setCurrentPage] = useState(initialPageNumber)
-  const [, setStorageValue] = useLocalStorage('CharacterName', initialName)
+
   const router = useRouter()
   const currentPath = router.asPath
 
   const { isDarkTheme, setIsDarkTheme } = useContext(themeContext)
 
-  const handlePageChange = (pageNumber: number): void => {
-    setCurrentPage(pageNumber)
-    setStorageValue('')
-  }
-
-  const handleValueChange = (name: string): void => {
+  const handleValueChange = async (name: string): Promise<void> => {
     setValue(name)
-    setStorageValue(name)
+
+    await router.push(
+      {
+        pathname: '/',
+        query: { name },
+      },
+      undefined,
+      { shallow: false },
+    )
   }
 
   const toggleTheme = useCallback(() => {
@@ -78,7 +79,7 @@ function MainPage({ initialCharacterData, initialPageNumber, initialName }: Main
       ) : (
         <Results charactersData={initialCharacterData} currentPath={currentPath} />
       )}
-      <Pagination charactersData={initialCharacterData} onPageChange={handlePageChange} />
+      <Pagination charactersData={initialCharacterData} />
       <PopUp />
     </div>
   )
