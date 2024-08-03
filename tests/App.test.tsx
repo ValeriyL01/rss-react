@@ -1,19 +1,26 @@
-import { Provider } from 'react-redux'
 import { render } from '@testing-library/react'
 
-import App from 'next/app'
-import { store } from '../src/store/store'
+import MyApp from '../src/pages/_app'
+import themeContext from '../src/context/themeContext'
 
-test('renders App component with RouterOutlet, Details, and NotFoundPage', async () => {
+function MockComponent() {
+  return <div>Mock Component</div>
+}
+
+test('renders App component with RouterOutlet, Details, and NotFoundPage', () => {
+  const mockThemeContextValue = {
+    isDarkTheme: false,
+    setIsDarkTheme: vi.fn(),
+  }
+
   const { container } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    <themeContext.Provider value={mockThemeContextValue}>
+      <MyApp Component={MockComponent} pageProps={{}} />
+    </themeContext.Provider>,
   )
 
   const element = container.querySelector('.container-pages')
 
   expect(element).toBeInTheDocument()
-
   expect(element).not.toHaveClass('dark')
 })

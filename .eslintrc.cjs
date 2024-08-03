@@ -16,6 +16,8 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:prettier/recommended',
+    'next',
+    'next/core-web-vitals',
   ],
   overrides: [
     {
@@ -59,7 +61,9 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/jsx-no-constructed-context-values': 'off',
     'react/button-has-type': 'off',
+    'no-console': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'import/no-import-module-exports': 'off',
     'react/require-default-props': [
       'error',
       {
