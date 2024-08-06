@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Loading } from '../src/components/loading/Loading'
+import { Loading } from '../src/app/loading'
 
 import themeContext from '../src/context/themeContext'
 

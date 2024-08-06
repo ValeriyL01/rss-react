@@ -1,21 +1,23 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+
 import Link from 'next/link'
-import { ResponseCharacter } from '../../types/types'
+import { useSearchParams } from 'next/navigation'
+
 import styles from './pagination.module.css'
 import { calculateNumberPagesPagination } from '../../utils/calculateNumberPagesPagination'
 import { Button } from '../button/Button'
 
 interface PaginationProps {
-  charactersData: ResponseCharacter
+  totalCount: number
 }
-export function Pagination({ charactersData }: PaginationProps) {
-  const router = useRouter()
-  const currentPath = router.asPath
-  const pageNumberFromUrl = Number(currentPath.split('=')[1])
-  const [activePage, setActivePage] = useState(pageNumberFromUrl ? Number(pageNumberFromUrl) : 1)
+export function Pagination({ totalCount }: PaginationProps) {
+  const searchParams = useSearchParams()
+
+  const pageParam = searchParams.get('page') || '1'
+
+  const [activePage, setActivePage] = useState(pageParam ? Number(pageParam) : 1)
   const numberElementsOnPage = 10
-  const pageNumbers = calculateNumberPagesPagination(charactersData, numberElementsOnPage)
+  const pageNumbers = calculateNumberPagesPagination(totalCount, numberElementsOnPage)
   return (
     <ul className={styles.pagination}>
       {pageNumbers.map((pageNumber) => (
