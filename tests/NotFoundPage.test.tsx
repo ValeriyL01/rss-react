@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import NotFoundPage from '../src/pages/NotFoundPage'
+import NotFoundPage from '../src/app/not-found'
 
 test('renders 404 text in h1 element', () => {
   const { container } = render(<NotFoundPage />)

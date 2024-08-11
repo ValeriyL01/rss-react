@@ -2,27 +2,20 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { DetailsComponent } from '../src/components/detailsComponent/DetailsComponent'
 
-import { ResponseCharacter } from '../src/types/types'
+import { Character } from '../src/types/types'
 import { store } from '../src/store/store'
 import themeContext from '../src/context/themeContext'
 
 describe('DetailsComponent', () => {
-  const characterData: ResponseCharacter = {
-    results: [
-      {
-        name: 'Luke Skywalker',
-        birth_year: '19 BBY',
-        eye_color: 'Blue',
-        hair_color: 'Blond',
-        height: '172',
-        gender: 'Male',
-        skin_color: 'Fair',
-        mass: '77',
-      },
-    ],
-    count: 0,
-    next: null,
-    previos: null,
+  const characterData: Character = {
+    name: 'Luke Skywalker',
+    birth_year: '19 BBY',
+    eye_color: 'Blue',
+    hair_color: 'Blond',
+    height: '172',
+    gender: 'Male',
+    skin_color: 'Fair',
+    mass: '77',
   }
 
   const handleCloseDetails = vi.fn()

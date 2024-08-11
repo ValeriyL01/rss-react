@@ -1,14 +1,21 @@
 import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import MainPage from '../src/pages'
-import { store } from '../src/store/store'
 
-const useRouter = vi.fn()
-module.exports = { useRouter }
-vi.mock('next/router', () => ({
+import { store } from '../src/store/store'
+import MainPage from '../src/app/page'
+
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
     asPath: '/',
     push: vi.fn(),
+  }),
+  useSearchParams: () => ({
+    get: (param: string) => {
+      if (param === 'page') {
+        return null
+      }
+      return null
+    },
   }),
 }))
 
@@ -22,35 +29,11 @@ vi.mock('../context/themeContext', () => ({
   default: mockThemeContext,
 }))
 
-const mockCharacterData = {
-  count: 82,
-  next: null,
-  previos: null,
-  results: [
-    {
-      name: 'Luke Skywalker',
-      birth_year: '19BBY',
-      eye_color: 'blue',
-      hair_color: 'blond',
-      height: '172',
-      skin_color: 'fair',
-    },
-    {
-      name: 'Darth Vader',
-      birth_year: '41.9BBY',
-      eye_color: 'yellow',
-      hair_color: 'none',
-      height: '202',
-      skin_color: 'white',
-    },
-  ],
-}
-
 describe('MainPage Component', () => {
   it('displays the title and handles theme button click', async () => {
     render(
       <Provider store={store}>
-        <MainPage initialCharacterData={mockCharacterData} initialName="" />
+        <MainPage />
       </Provider>,
     )
 
