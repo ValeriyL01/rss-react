@@ -1,21 +1,26 @@
-import { Provider } from 'react-redux'
 import { render } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import { store } from '../src/store/store'
-import App from '../src/App'
 
-test('renders App component with RouterOutlet, Details, and NotFoundPage', async () => {
+import MyApp from '../src/pages/_app'
+import themeContext from '../src/context/themeContext'
+
+function MockComponent() {
+  return <div>Mock Component</div>
+}
+
+test('renders App component with RouterOutlet, Details, and NotFoundPage', () => {
+  const mockThemeContextValue = {
+    isDarkTheme: false,
+    setIsDarkTheme: vi.fn(),
+  }
+
   const { container } = render(
-    <Provider store={store}>
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
-    </Provider>,
+    <themeContext.Provider value={mockThemeContextValue}>
+      <MyApp Component={MockComponent} pageProps={{}} />
+    </themeContext.Provider>,
   )
 
   const element = container.querySelector('.container-pages')
 
   expect(element).toBeInTheDocument()
-
   expect(element).not.toHaveClass('dark')
 })

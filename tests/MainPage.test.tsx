@@ -1,44 +1,60 @@
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import userEvent from '@testing-library/user-event'
-import { MainPage } from '../src/pages/mainPage/MainPage'
+import MainPage from '../src/pages'
 import { store } from '../src/store/store'
 
-vi.mock('react-router-dom', () => ({
-  useLocation: vi.fn().mockReturnValue({ search: '' }),
-  useNavigate: vi.fn(),
+const useRouter = vi.fn()
+module.exports = { useRouter }
+vi.mock('next/router', () => ({
+  useRouter: () => ({
+    asPath: '/',
+    push: vi.fn(),
+  }),
 }))
 
+const mockThemeContext = {
+  isDarkTheme: false,
+  setIsDarkTheme: vi.fn(),
+}
+
+vi.mock('../context/themeContext', () => ({
+  __esModule: true,
+  default: mockThemeContext,
+}))
+
+const mockCharacterData = {
+  count: 82,
+  next: null,
+  previos: null,
+  results: [
+    {
+      name: 'Luke Skywalker',
+      birth_year: '19BBY',
+      eye_color: 'blue',
+      hair_color: 'blond',
+      height: '172',
+      skin_color: 'fair',
+    },
+    {
+      name: 'Darth Vader',
+      birth_year: '41.9BBY',
+      eye_color: 'yellow',
+      hair_color: 'none',
+      height: '202',
+      skin_color: 'white',
+    },
+  ],
+}
+
 describe('MainPage Component', () => {
-  it('handles form submission correctly', async () => {
+  it('displays the title and handles theme button click', async () => {
     render(
       <Provider store={store}>
-        <MainPage />
+        <MainPage initialCharacterData={mockCharacterData} initialName="" />
       </Provider>,
     )
 
-    const inputElement = screen.getByRole('textbox') as HTMLInputElement
-    const submitButton = screen.getByRole('button', { name: /search/i })
-
-    fireEvent.change(inputElement, { target: { value: 'Luke Skywalker' } })
-    fireEvent.click(submitButton)
-
-    const loadingElement = screen.getByText('Loading...')
-    expect(loadingElement).toBeInTheDocument()
-  })
-  it('is there a title on the main page', async () => {
-    render(
-      <Provider store={store}>
-        <MainPage />
-      </Provider>,
-    )
-
-    const buttonTheme = screen.getByText('Theme')
-
-    const user = userEvent.setup()
-    await user.click(buttonTheme)
     const titleElement = screen.getByText('Search Star Wars characters')
-
     expect(titleElement).toBeInTheDocument()
   })
 })

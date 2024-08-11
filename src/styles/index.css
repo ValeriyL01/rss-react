@@ -15,7 +15,9 @@
   max-width: 1280px;
   height: 100vh;
 }
-
+body {
+  flex-direction: column;
+}
 .dark {
   background-color: #1f1b24;
 }

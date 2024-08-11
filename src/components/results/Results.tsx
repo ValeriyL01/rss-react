@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { useContext } from 'react'
 import { ResponseCharacter } from '../../types/types'
@@ -6,20 +6,12 @@ import { addSelectedCharacter, InitialState, removeSelectedCharacter } from '../
 import styles from './results.module.css'
 import themeContext from '../../context/themeContext'
 
-interface LocationState {
-  hash: string
-  key: string
-  pathname: string
-  search: string
-  state: null
-}
-
 interface ResultsProps {
   charactersData: ResponseCharacter
-  location: LocationState
+  currentPath: string
 }
 
-export function Results({ charactersData, location }: ResultsProps) {
+export function Results({ charactersData, currentPath }: ResultsProps) {
   const dispatch = useDispatch()
   const selectedCharacters = useSelector(
     (state: { selectedCharacter: InitialState }) => state.selectedCharacter.character,
@@ -31,12 +23,12 @@ export function Results({ charactersData, location }: ResultsProps) {
         <div className={styles.listItems}>
           {charactersData.results.map((character) => (
             <div className={`${styles.item} ${isDarkTheme ? styles.darkItem : ''}`} key={character.name}>
-              <NavLink data-testid="link" key={`${character.name}`} to={`/details/${character.name}${location.search}`}>
+              <Link data-testid="link" key={`${character.name}`} href={`/details/${character.name}${currentPath}`}>
                 <h3 className={`${isDarkTheme ? styles.itemTitle : ''}`}>{character.name}</h3>
                 <ul>
                   <li className={`${isDarkTheme ? styles.itemText : ''}`}>Birth year: {character.birth_year}</li>
                 </ul>
-              </NavLink>
+              </Link>
               <input
                 type="checkbox"
                 checked={selectedCharacters.some((item) => item.name === character.name)}

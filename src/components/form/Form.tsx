@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, FormEvent } from 'react'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import styles from './form.module.css'
 
@@ -15,15 +15,13 @@ export function Form({ value, setValue, isLoading, handleValueChange }: FormProp
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
-
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleValueChange(value)
+    setStorageValue(value)
+  }
   return (
-    <form
-      className={styles.formSearch}
-      onSubmit={() => {
-        handleValueChange(value)
-        setStorageValue(value)
-      }}
-    >
+    <form className={styles.formSearch} onSubmit={handleSubmit}>
       <input
         className={styles.inputSearch}
         type="text"

@@ -1,37 +1,30 @@
 import { Provider } from 'react-redux'
 import { render, screen } from '@testing-library/react'
-import { Details } from '../src/pages/details/Details'
+import Details from '../src/pages/details/[name]'
 import { store } from '../src/store/store'
 
-vi.mock('react-router-dom', () => ({
-  useLocation: vi.fn(() => ({ search: 'name=Luke Skywalker' })),
-  useNavigate: vi.fn(),
+const useRouter = vi.fn()
+module.exports = { useRouter }
+vi.mock('next/router', () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+  }),
 }))
 
-vi.mock('../api/api', () => ({
-  getCharacter: vi.fn(() =>
-    Promise.resolve({
-      results: [
-        {
-          name: 'Luke Skywalker',
-          birth_year: '19 BBY',
-          eye_color: 'Blue',
-          hair_color: 'Blond',
-          height: '172',
-          gender: 'Male',
-          skin_color: 'Fair',
-          mass: '77',
-        },
-      ],
-    }),
-  ),
+const mockThemeContext = {
+  isDarkTheme: false,
+}
+
+vi.mock('../../context/themeContext', () => ({
+  __esModule: true,
+  default: mockThemeContext,
 }))
 
 describe('Details', () => {
   it('displays the Loading component', async () => {
     render(
       <Provider store={store}>
-        <Details />
+        <Details initialCharacterData={null} />
       </Provider>,
     )
 
