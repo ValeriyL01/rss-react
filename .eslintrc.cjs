@@ -59,13 +59,15 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/jsx-no-constructed-context-values': 'off',
     'react/button-has-type': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/control-has-associated-label': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
     'react/require-default-props': [
       'error',
       {
         functions: 'ignore',
       },
     ],
-    'react/jsx-max-props-per-line': [1, { maximum: 1 }],
   },
   settings: {
     react: {

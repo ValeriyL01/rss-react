@@ -1,7 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
+import reactHookFormReducer from './reactHookFormSlice'
+import countriesReducer from './countriesSlice'
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    form: reactHookFormReducer,
+    countries: countriesReducer,
+  },
   middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(),
 })
 

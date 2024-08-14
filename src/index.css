@@ -9,12 +9,6 @@
 #root {
   margin: 0 auto;
 }
-.container-pages {
-  display: flex;
-  align-items: center;
-  max-width: 1280px;
-  height: 100vh;
-}
 
 a {
   text-decoration: none;
@@ -25,14 +19,26 @@ a:hover {
   text-decoration: none;
   color: #242424;
 }
-
+ul {
+  list-style: none;
+  padding: 0;
+}
 body {
   margin: 0 auto;
   display: flex;
   place-items: center;
   min-width: 100vh;
 }
-
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 960px;
+  padding: 10px;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -49,17 +55,63 @@ button {
   background-color: #f9f9f9;
   cursor: pointer;
   transition: 0.25s;
+  margin-top: 10px;
 }
 button:hover {
   background-color: lightblue;
 }
-.container {
-  position: relative;
+button:disabled {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+.header {
+  display: flex;
+  gap: 20px;
+  padding: 5px;
+}
+form {
   display: flex;
   flex-direction: column;
+  width: 450px;
+  margin: 0 auto;
+  padding: 50px;
+}
+.img {
+  max-width: 100%;
+}
+label {
+  display: flex;
+  font-size: 16px;
+  color: #333;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.ladelRadio {
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  max-width: 960px;
-  height: 100vh;
+}
+.genderWrapper {
+  display: flex;
+  gap: 10px;
+}
+input,
+select {
+  height: 25px;
+
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+span {
+  font-weight: bold;
+}
+p {
+  color: red;
+  margin: 5px 0 0 0;
+}
+.formData {
+  width: 200px;
+  background-color: aliceblue;
+  border-radius: 10%;
+  padding: 10px;
 }
