@@ -1,0 +1,130 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #213547;
+  background-color: #ffffff;
+  text-align: center;
+}
+#root {
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #242424;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+body {
+  margin: 0 auto;
+  display: flex;
+  place-items: center;
+  min-width: 100vh;
+}
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 960px;
+  padding: 10px;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: 0.25s;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: lightblue;
+}
+button:disabled {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+.header {
+  display: flex;
+  gap: 20px;
+  padding: 5px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  margin: 0 auto;
+  padding: 50px;
+}
+img {
+  max-width: 100%;
+}
+label {
+  display: flex;
+  font-size: 16px;
+  color: #333;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.ladelRadio {
+  display: flex;
+  align-items: center;
+}
+.genderWrapper {
+  display: flex;
+  gap: 10px;
+}
+input,
+select {
+  height: 25px;
+
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+span {
+  font-weight: bold;
+}
+p {
+  color: red;
+  margin: 5px 0 0 0;
+}
+.formDataContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 500px;
+  min-height: 500px;
+  background: #e8e8e8;
+}
+.formData {
+  max-width: 200px;
+  background-color: aliceblue;
+
+  padding: 10px;
+}
+
+.active {
+  color: aquamarine;
+}
