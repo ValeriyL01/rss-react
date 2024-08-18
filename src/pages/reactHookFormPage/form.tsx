@@ -2,9 +2,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setFormData } from '../../store/reactHookFormSlice'
+
 import { RootState } from '../../store/store'
-import { schema } from './validation'
+import { schema } from '../../validation/validation'
+import { setFormData } from '../../store/reactHookFormSlice'
 
 interface IForm {
   name: string

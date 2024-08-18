@@ -13,8 +13,8 @@ const initialState: FormState = {
   country: '',
 }
 
-const reactHookFormSlice = createSlice({
-  name: 'reactHookForm',
+const formSlice = createSlice({
+  name: 'form',
   initialState,
   reducers: {
     setFormData: (state, action: PayloadAction<FormState>) => {
@@ -23,5 +23,5 @@ const reactHookFormSlice = createSlice({
   },
 })
 
-export const { setFormData } = reactHookFormSlice.actions
-export default reactHookFormSlice.reducer
+export const { setFormData } = formSlice.actions
+export default formSlice.reducer

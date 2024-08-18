@@ -1,3 +1,9 @@
+import { Form } from './form'
+
 export function FormPage() {
-  return <div>form 1</div>
+  return (
+    <div>
+      <Form />
+    </div>
+  )
 }
